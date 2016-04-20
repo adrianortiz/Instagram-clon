@@ -20,13 +20,24 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         // delegado que va a informar, es este propio view controller self
         imagePC.delegate = self
         // De donde obntedrá las fotos fotos del usuario
-        imagePC.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePC.sourceType = UIImagePickerControllerSourceType.PhotoLibrary // .Camera
         // Evitar que puede editar las fotos
         imagePC.allowsEditing = false
         
         // Mostrar al usuario el view controller de fotos
         self.presentViewController(imagePC, animated: true, completion: nil)
         
+    }
+    
+    // Identificar cuando un usuario ha elegido una foto
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        print("El usuario ha elegido una foto")
+        
+        // Mostrar la foto seleccionada
+        self.pickedImage.image = image
+        
+        // Desactivar modal
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func viewDidLoad() {
